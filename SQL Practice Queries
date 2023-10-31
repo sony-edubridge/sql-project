@@ -1,0 +1,303 @@
+
+Practise Queries:
+
+Table 1: Workersdetails (5 rows)....    (WORKER_ID  FIRST_NAME	LAST_NAME SALARY	JOINING_DATE )
+Table 2: employeeInfo...(5 rows) (Emp.ID  Emp name    Designation    Manager    Hire date)
+Table 3: movies....(5 rows). (Movie ID  Movie-Name  Director  Release year   language   movie release country)
+Table 4: hospitaldetails...(5 rows)..(Patient name, Patient ID, doctor name, illness, medication, DOJ).
+Table 5: Abroademp details..empid,empname,age,city,country,salary.
+Table 6: Customers..CID,name,address,ph.no
+Table 7: Orders..Orderno,CID,Product details.
+
+
+Table 1: workersdetails
+Table creation
+
+        create table workersdetails
+        (
+         workersID number(3),
+         firstname varchar(10),
+         lastname varchar(10),
+         salary number(10),
+         Joiningdate date
+         );
+
+Insert values into table 
+
+insert into workersdetails values(100,'raju','velupa',15000,'05-mar-2016');
+insert into workersdetails values(101,'nikhil','mantha',25000,'06-apr-2017');
+insert into workersdetails values(103,'srikar','singam',30000,'09-aug-2015');
+insert into workersdetails values(104,'venkat','thanda',15000,'05-mar-2016');
+insert into workersdetails values(105,'deepak','kolli',15000,'05-mar-2016');
+
+
+
+Table 2: Movies
+
+create table movies
+    (
+    MovieID number(3),
+    Moviename varchar(10),
+    Director varchar(8),
+    releaseYear number(4),
+    language varchar(10),
+    releasecountry varchar(10)
+    );
+
+insert into movies values(100,'bb','raja','2015','telugu','india');
+insert into movies values(101,'mirchi','sharuk','2014','telugu','india');
+insert into movies values(102,'RRR','arjun','2019','hindi','UK');
+insert into movies values(103,'ega','charan','2012','english','US');
+insert into movies values(104,'liger','vijay','2009','marathi','canada');
+
+
+Table 3: Employeeinfo
+create table employeeinfo
+        (
+         empID number(3),
+         empname varchar(10),
+         Designation varchar(10),
+         Manager varchar(10),
+         Hiredate date
+         );
+
+insert into employeeinfo values(10,'sony','tester','amjath','20-jan-2022');
+insert into employeeinfo values(11,'sneha','devops','rakesh','12-dec-2021');
+insert into employeeinfo values(12,'sindu','dev','sujji','13-sep-2020');
+insert into employeeinfo values(13,'shravya','admin','karthik','10-may-2019');
+insert into employeeinfo values(14,'shivani','QA','deepthi','17-july-2018');
+
+
+Table4: Hospitaldetails
+
+create table hospitaldetails
+  (
+   PatientID number(3),
+   Patientname varchar(10),
+   Doctorname varchar(10),
+   Illness varchar(13),
+   Medication varchar(12),
+   DOJ date
+  );
+
+insert into hospitaldetails values(20,'sakshi','kiran','fever','tablets','02-feb-2020');
+insert into hospitaldetails values(21,'sai','shiva','dengue','biotics','07-may-2020');
+insert into hospitaldetails values(22,'vamsi','roy','typhoid','tablets','15-may-2022');
+insert into hospitaldetails values(23,'arjun','john','infection','surgery','19-oct-2018');
+insert into hospitaldetails values(24,'reyan','madan','viralinf','op','30-nov-2003');
+
+
+Table5:Abroademp
+
+create table abroademp
+   (
+    empID number(3),
+    empname varchar(10),
+    age number(3),
+    City varchar(12),
+    Country varchar(10),
+    salary number(9)
+   );
+
+insert into abroademp values(601,'mary',33,'london','uk',80000);
+insert into abroademp values(602,'sophy',35,'texas','us',85000);
+insert into abroademp values(603,'ray',39,'arlington','us',90000);
+insert into abroademp values(604,'sajj',45,'amphony','uk',99000);
+insert into abroademp values(605,'walli',48,'tornato','canada',95000);
+insert into abroademp values(606,'dhoni',52,'ranchi','india',78000);
+insert into abroademp values(607,'suresh',58,'hyderabad','india',58000);
+
+
+Table 6:Customers
+
+create table Customers
+  (
+    CID number(3),
+    Name varchar(10),
+    Address varchar(12),
+    phonenumber number(10)
+  );
+
+insert into Customers values(437,'sushmitha','hyderabad',8886154421);
+insert into Customers values(438,'Roopika','bangalore',8908754421);
+
+
+Table 7:orders
+ 
+create table orders
+ (
+  OrderID number(3),
+  CID number(3),
+  Productdetails varchar(15)
+ );
+
+ insert into orders values(A12,437,'bag');
+ insert into orders values(A18,438,'bottle');
+
+
+
+1, WAQ to change the release country to australia,whose director is sharuk.
+
+   update movies
+   set releasecountry='australia'
+   where director='sharuk';
+
+2,WAQ to change the moviename to charle and director name to sheshu, whose release year is greater than 2013.
+  
+  update movies
+  set moviename='charle',director='shehsu'
+  where releaseyear>2013;
+
+3,WAQ to rename the employeeinfo table to empinfo
+    alter table employeeinfo
+    rename to empinformation;
+
+4,WAQ to rename the columnname 'city' to 'state' in abroademp table
+   alter table abroademp
+   rename column city to state;
+
+5,WAQ to add column 'job' and column 'familydetails' to table workersdetails
+   
+  alter table workersdetails
+  add(
+      job varchar(8),
+      Familydetails varchar(10)
+      );
+
+6,WAQ to drop the column 'familydetails' from table workersdetails
+
+  alter table workersdetails
+  drop column familydetails;
+
+7,WAQ to increase the column size of Illness in hospitaldetails table
+   
+  alter table hospitaldetails
+  modify Illness varchar (20); 
+
+8,Write an SQL query to fetch the EmpId and empName of all the employees working under the Manager sujji.
+
+  select empid,empname from employeeinfo
+  where manager='sujji';
+
+9,Write an SQL query to fetch the different languages which are unique from movies table by using alias.
+
+  select distinct languages as lang from movies;
+
+
+10,Write an SQL query to fetch the count of patients who has joined the hospital in between 2018 to 2022.
+   select count(*) from hospitaldetails 
+   where DOJ between '01-jan-2018' and '31-dec-2022';
+
+11,Write an SQL query to fetch the count of patientname column who has joined the hospital in between 2018 to 2022.
+
+   select count(patientname) from hospitaldetails 
+   where DOJ between '01-jan-2018' and '31-dec-2022';
+
+
+12,Write an SQL query to find the maximum salary of the workers,whose joining date is in between 2013 to 2016.
+
+  select max(salary) from workersdetails
+  where joiningdate between'01-Jan-2013'and '31-dec-2016'; 
+
+13,,Write an SQL query to find the minimum and average,sum of salary of the workers.
+  select avg(salary) from workersdetails;
+  select min(salary) from workersdetails;
+  select sum(salary) from workersdetails;
+
+14,Write an SQL query to find the employee id whose salary lies in the range of 15000 and 45000.
+
+  select workersid from workersdetails
+  where salary between 15000 and 45000;
+
+
+15, Write an SQL query to fetch the patientname and patientid whose illness is dengue, getting treated under doctor shiva.
+
+   select patientname,patientid from hospitaldetails
+   where illness='dengue' and doctorname='shiva';
+
+16,write a query  to get the list of employees who has joined after 2020.
+
+   select * from employeeinfo
+   where Hiredate>'31-dec-2020';
+
+17,write a query  to get the list of employees who has joined after 2018 and before 2022.
+
+    select * from employeeinfo
+    where Hiredate>'31-dec-2018' and Hiredate<'01-jan-2022';
+
+
+18,Write a query to get the patientid details in desending order.
+  select * from hospitaldetails
+  order by patientid desc;
+
+19,WAQ to get sum of salaries as total salary, country wise from abroademp table
+
+   select country,sum(salary) as totalsalary from abroademp
+   group by country;
+
+20,WAQ to get sum of salaries as total salary and count of employees as Employeecount, country wise from abroademp table
+
+   select country,sum(salary) as totalsalary,count(empid) as employeecount from abroademp
+   group by country;
+
+21,WAQ to get the count of employess,countrywise.
+
+  select country,count(empid) from abroademp
+  group by country;
+
+22,WAQ to get the count of employess,countrywise and statewise
+
+  select country,state,count(empid)  from abroademp
+  group by country,state;
+
+23,WAQ to get the count of employess as employeecountdetails,countrywise,for count greater than one.
+   
+  select country,count(empid) as employeecountdetails from abroademp
+  group by country
+  having count(empid)>1;
+
+24,WAQ to select the name of the employee who is working under Karthik.
+   
+  select empname from empinformation
+  where manager='karthik';
+
+25,WAQ to get the records of common data from customersdetails and orders table
+  
+  select customers.CID,customers.address,customers.phonenumber,orders.producttdetails from customers inner join orders
+  on customers.CID=orders.CID;
+
+26,WAQ to get the records of commondata and customers table data.
+ 
+ select customers.CID,customers.address,customers.phonenumber,orders.producttdetails from customers left outer join orders
+ on customers.CID=orders.CID;
+
+27,WAQ to get the records of commondata and orders table data.
+
+  select customers.CID,customers.address,customers.phonenumber,orders.producttdetails from customers right outer join orders
+  on customers.CID=orders.CID;
+
+28,WAQ to get the list of employees who has joined in 2019.
+
+   select * from empinformation
+   where Hiredate>='01-jan-2019' and Hiredate<='31-Dec-2019';
+
+29,WAQ to get the descending order of empinformation
+  
+  select * from empinformation
+  order by empid desc;
+
+30,Write an SQL query to fetch the language wise count of movies sorted by movies count in descending order.
+
+ select language,count(movieid) from movies
+ group by language
+ order by count(movieid) desc;
+
+
+
+
+
+
+
+
+
+
